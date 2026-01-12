@@ -1,5 +1,8 @@
 -- Ghoul Hub UI ☠️
-
+-- Floating Button
+local Floating = loadstring(game:HttpGet(
+	"https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/Modules/FloatingButton.lua"
+))()
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
@@ -109,5 +112,5 @@ createButton(tab6, "Close Hub", 20, function()
 end)
 -- Movement module
 local Movement = loadstring(game:HttpGet(
-	"https://raw.githubusercontent.com/SEU_USUARIO/GhoulHub/main/Modules/Movement.lua"
+	"https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/Modules/Movement.lua"
 ))()
