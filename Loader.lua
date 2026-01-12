@@ -7,37 +7,35 @@ end
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
--- Proteção simples (não carregar duas vezes)
-local gui = Player:WaitForChild("PlayerGui")
-if gui:FindFirstChild("GhoulHub") then
+-- Anti duplicação
+if Player:WaitForChild("PlayerGui"):FindFirstChild("GhoulHub") then
 	return
 end
 
--- URL BASE (SEU REPOSITÓRIO)
+-- 🔥 URL CERTA (SEU REPO)
 local BASE_URL = "https://raw.githubusercontent.com/mig0el787-arch/Ghoulhub/main/"
 
--- Função de load
 local function load(file)
 	return loadstring(game:HttpGet(BASE_URL .. file))()
 end
 
--- INTRO (opcional)
+-- Intro
 pcall(function()
 	local Intro = load("Intro.lua")
 	if Intro and Intro.Play then
-		Intro:Play()
+		Intro.Play()
 	end
 end)
 
--- MÚSICA (5 segundos – controlado no Music.lua)
+-- Música
 pcall(function()
 	local Music = load("Music.lua")
 	if Music and Music.Play then
-		Music:Play()
+		Music.Play()
 	end
 end)
 
--- UI (sempre por último)
+-- UI (AQUI MUDA O VISUAL)
 pcall(function()
-	load("UI.lua")
+	load("Ui.lua")
 end)
