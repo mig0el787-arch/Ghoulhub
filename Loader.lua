@@ -13,7 +13,7 @@ if Player:WaitForChild("PlayerGui"):FindFirstChild("GhoulHub") then
 end
 
 -- Pasta do Hub
-local BASE_URL = "https://raw.githubusercontent.com/SEU_USUARIO/GhoulHub/main/"
+local BASE_URL = "https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/"
 
 -- Carrega módulos
 local function load(file)
