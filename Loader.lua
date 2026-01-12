@@ -1,5 +1,8 @@
 -- Ghoul Hub Loader ☠️
-
+-- Intro
+pcall(function()
+	load("Modules/Intro.lua").Play()
+end)
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
