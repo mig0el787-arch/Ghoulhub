@@ -107,3 +107,7 @@ end)
 createButton(tab6, "Close Hub", 20, function()
 	gui:Destroy()
 end)
+-- Movement module
+local Movement = loadstring(game:HttpGet(
+	"https://raw.githubusercontent.com/SEU_USUARIO/GhoulHub/main/Modules/Movement.lua"
+))()
