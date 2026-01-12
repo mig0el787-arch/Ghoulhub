@@ -1,5 +1,25 @@
 -- Ghoul Hub UI (CoreGui fallback)
+warn("UI CARREGOU")
 
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "GhoulHub"
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(20, 0, 30)
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.Text = "Ghoul Hub ☠️"
+title.TextColor3 = Color3.fromRGB(180, 0, 255)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 18
 local CoreGui = game:GetService("CoreGui")
 
 -- Remove UI antiga se existir
