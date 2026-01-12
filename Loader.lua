@@ -1,8 +1,5 @@
 -- Ghoul Hub Loader ☠️
--- Intro
-pcall(function()
-	load("Modules/Intro.lua").Play()
-end)
+
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
@@ -15,20 +12,27 @@ if Player:WaitForChild("PlayerGui"):FindFirstChild("GhoulHub") then
 	return
 end
 
--- Pasta do Hub
-local BASE_URL = "https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/"
+-- 🔴 TROCA PELO TEU USUÁRIO
+local BASE_URL = "https://raw.githubusercontent.com/SEU_USUARIO/GhoulHub/main/"
 
--- Carrega módulos
 local function load(file)
 	return loadstring(game:HttpGet(BASE_URL .. file))()
 end
 
--- Música (5 segundos)
+-- ▶️ INTRO (PRIMEIRO)
 pcall(function()
-	load("Modules/Music.lua").Play()
+	load("Modules/Intro.lua").Play()
 end)
 
--- Interface
+-- ▶️ MÚSICA (OPCIONAL)
+pcall(function()
+	local Music = load("Modules/Music.lua")
+	if Music and Music.Play then
+		Music:Play()
+	end
+end)
+
+-- ▶️ UI (POR ÚLTIMO)
 pcall(function()
 	load("Modules/UI.lua")
 end)
