@@ -1,122 +1,137 @@
--- Ghoul Hub UI ☠️
--- Floating Button
-local Floating = loadstring(game:HttpGet(
-	"https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/Modules/FloatingButton.lua"
-))()
+--// Ghoul Hub ☠️ | UI Module | Black & Purple
+
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
+-- Proteção
+if Player.PlayerGui:FindFirstChild("GhoulHub") then
+	return
+end
+
+-- Load Modules
+local BASE_URL = "https://raw.githubusercontent.com/SEU_USUARIO/GhoulHub/main/Modules/"
+
+local Movement = loadstring(game:HttpGet(BASE_URL .. "Movement.lua"))()
+local Floating = loadstring(game:HttpGet(BASE_URL .. "Floating.lua"))()
+
 -- GUI
-local gui = Instance.new("ScreenGui")
+local gui = Instance.new("ScreenGui", Player.PlayerGui)
 gui.Name = "GhoulHub"
-gui.Parent = Player:WaitForChild("PlayerGui")
 gui.ResetOnSpawn = false
 
--- MAIN
+-- Main Frame
 local main = Instance.new("Frame", gui)
 main.Size = UDim2.new(0, 520, 0, 330)
 main.Position = UDim2.new(0.5, -260, 0.5, -165)
-main.BackgroundColor3 = Color3.fromRGB(10,10,10)
-main.BorderSizePixel = 0
-Instance.new("UICorner", main).CornerRadius = UDim.new(0,14)
+main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+main.Visible = true
 
--- TITLE
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 14)
+
+-- Title Bar
 local title = Instance.new("TextLabel", main)
-title.Size = UDim2.new(1, -140, 0, 50)
-title.Position = UDim2.new(0, 140, 0, 0)
-title.BackgroundTransparency = 1
-title.Text = "Ghoul hub ☠️"
-title.Font = Enum.Font.GothamBlack
-title.TextSize = 22
-title.TextColor3 = Color3.fromRGB(170, 80, 255)
-title.TextXAlignment = Left
+title.Size = UDim2.new(1, 0, 0, 50)
+title.BackgroundColor3 = Color3.fromRGB(60, 0, 90)
+title.Text = "Ghoul Hub ☠️"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.TextColor3 = Color3.new(1,1,1)
 
--- SIDEBAR (BRANCA)
-local side = Instance.new("Frame", main)
-side.Size = UDim2.new(0, 120, 1, 0)
-side.BackgroundColor3 = Color3.fromRGB(245,245,245)
-side.BorderSizePixel = 0
-Instance.new("UICorner", side).CornerRadius = UDim.new(0,14)
+Instance.new("UICorner", title).CornerRadius = UDim.new(0, 14)
 
--- CONTENT
+-- Sidebar
+local sidebar = Instance.new("Frame", main)
+sidebar.Size = UDim2.new(0, 140, 1, -50)
+sidebar.Position = UDim2.new(0, 0, 0, 50)
+sidebar.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+
+-- Content
 local content = Instance.new("Frame", main)
+content.Size = UDim2.new(1, -140, 1, -50)
 content.Position = UDim2.new(0, 140, 0, 50)
-content.Size = UDim2.new(1, -160, 1, -70)
 content.BackgroundTransparency = 1
 
--- Tabs
+-- Utility: Tabs
 local tabs = {}
 
-local function createTab(name, order)
-	-- Button
-	local btn = Instance.new("TextButton", side)
-	btn.Size = UDim2.new(1, -20, 0, 42)
-	btn.Position = UDim2.new(0, 10, 0, 10 + (order-1)*50)
-	btn.BackgroundColor3 = Color3.fromRGB(255,255,255)
-	btn.Text = name
-	btn.Font = Enum.Font.GothamBold
-	btn.TextSize = 14
-	btn.TextColor3 = Color3.fromRGB(140, 60, 220)
-	btn.BorderSizePixel = 0
-	Instance.new("UICorner", btn).CornerRadius = UDim.new(0,10)
-
-	-- Frame
-	local frame = Instance.new("Frame", content)
-	frame.Size = UDim2.new(1,0,1,0)
-	frame.Visible = false
-	frame.BackgroundTransparency = 1
-
-	btn.MouseButton1Click:Connect(function()
-		for _,v in pairs(tabs) do
-			v.Visible = false
-		end
-		frame.Visible = true
-	end)
-
-	table.insert(tabs, frame)
-	return frame
+local function createTab(name)
+	local tab = Instance.new("Frame", content)
+	tab.Size = UDim2.new(1, 0, 1, 0)
+	tab.Visible = false
+	tab.BackgroundTransparency = 1
+	tabs[name] = tab
+	return tab
 end
 
--- ABAS
-local tab1 = createTab("Player", 1)
-local tab2 = createTab("Movement", 2)
-local tab3 = createTab("World", 3)
-local tab4 = createTab("Fun", 4)
-local tab5 = createTab("Avatar", 5)
-local tab6 = createTab("Settings", 6)
-
-tabs[1].Visible = true
-
--- Botão padrão
+-- Utility: Buttons
 local function createButton(parent, text, y, callback)
 	local b = Instance.new("TextButton", parent)
-	b.Size = UDim2.new(0, 220, 0, 42)
-	b.Position = UDim2.new(0, 10, 0, y)
-	b.BackgroundColor3 = Color3.fromRGB(60, 0, 90)
+	b.Size = UDim2.new(0, 260, 0, 42)
+	b.Position = UDim2.new(0, 20, 0, y)
+	b.BackgroundColor3 = Color3.fromRGB(90, 0, 140)
 	b.Text = text
 	b.Font = Enum.Font.GothamBold
 	b.TextSize = 14
 	b.TextColor3 = Color3.new(1,1,1)
 	b.BorderSizePixel = 0
-	Instance.new("UICorner", b).CornerRadius = UDim.new(0,10)
+
+	Instance.new("UICorner", b).CornerRadius = UDim.new(0, 10)
+
 	b.MouseButton1Click:Connect(callback)
 end
 
--- EXEMPLOS DE BOTÕES
-createButton(tab1, "Reset Character", 20, function()
-	Player.Character:BreakJoints()
+-- Tabs
+local tabMovement = createTab("Movement")
+tabMovement.Visible = true
+
+-- Sidebar Buttons
+local function sidebarButton(text, y, tab)
+	local b = Instance.new("TextButton", sidebar)
+	b.Size = UDim2.new(1, -20, 0, 40)
+	b.Position = UDim2.new(0, 10, 0, y)
+	b.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	b.Text = text
+	b.Font = Enum.Font.GothamBold
+	b.TextSize = 13
+	b.TextColor3 = Color3.new(1,1,1)
+	b.BorderSizePixel = 0
+
+	Instance.new("UICorner", b).CornerRadius = UDim.new(0, 8)
+
+	b.MouseButton1Click:Connect(function()
+		for _, t in pairs(tabs) do
+			t.Visible = false
+		end
+		tab.Visible = true
+	end)
+end
+
+sidebarButton("Movement", 20, tabMovement)
+
+-- Movement Buttons
+createButton(tabMovement, "Speed x2", 20, function()
+	Movement.SetSpeed(32)
 end)
 
-createButton(tab6, "Close Hub", 20, function()
+createButton(tabMovement, "Jump High", 70, function()
+	Movement.SetJump(100)
+end)
+
+createButton(tabMovement, "Gravity Low", 120, function()
+	Movement.SetGravity(80)
+end)
+
+createButton(tabMovement, "Reset Stats", 170, function()
+	Movement.Reset()
+end)
+
+createButton(tabMovement, "Close Hub", 230, function()
 	gui:Destroy()
 end)
--- Movement module
-local Movement = loadstring(game:HttpGet(
-	"https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/Modules/Movement.lua"
-))()
--- Toggle via botão flutuante
-main.Visible = true
 
+-- Floating Button
 Floating.Create(function()
 	main.Visible = not main.Visible
 end)
+
+return true
