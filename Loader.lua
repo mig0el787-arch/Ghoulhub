@@ -13,7 +13,7 @@ if Player:WaitForChild("PlayerGui"):FindFirstChild("GhoulHub") then
 end
 
 -- 🔴 TROCA PELO TEU USUÁRIO
-local BASE_URL = "https://raw.githubusercontent.com/SEU_USUARIO/GhoulHub/main/"
+local BASE_URL = "https://raw.githubusercontent.com/mig0el787-arch/Ghoulhub/main/"
 
 local function load(file)
 	return loadstring(game:HttpGet(BASE_URL .. file))()
