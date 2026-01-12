@@ -114,3 +114,9 @@ end)
 local Movement = loadstring(game:HttpGet(
 	"https://raw.githubusercontent.com/mig0el787-arch/GhoulHub/main/Modules/Movement.lua"
 ))()
+-- Toggle via botão flutuante
+main.Visible = true
+
+Floating.Create(function()
+	main.Visible = not main.Visible
+end)
